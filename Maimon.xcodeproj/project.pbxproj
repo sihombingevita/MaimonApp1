@@ -14,6 +14,8 @@
 		423B852F269E92BB00D2A38C /* Maimon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 423B852D269E92BB00D2A38C /* Maimon.xcdatamodeld */; };
 		423B8531269E92C300D2A38C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 423B8530269E92C300D2A38C /* Assets.xcassets */; };
 		423B8534269E92C300D2A38C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423B8532269E92C300D2A38C /* LaunchScreen.storyboard */; };
+		DD2B7820269ED34E0045C8C3 /* addIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */; };
+		DD2B7822269ED3620045C8C3 /* addExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		423B8530269E92C300D2A38C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		423B8533269E92C300D2A38C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		423B8535269E92C300D2A38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addIncomeViewController.swift; sourceTree = "<group>"; };
+		DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExpenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +70,18 @@
 				423B8532269E92C300D2A38C /* LaunchScreen.storyboard */,
 				423B8535269E92C300D2A38C /* Info.plist */,
 				423B852D269E92BB00D2A38C /* Maimon.xcdatamodeld */,
+				DD2B7823269ED36B0045C8C3 /* ViewController */,
 			);
 			path = Maimon;
+			sourceTree = "<group>";
+		};
+		DD2B7823269ED36B0045C8C3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */,
+				DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +155,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				423B852F269E92BB00D2A38C /* Maimon.xcdatamodeld in Sources */,
+				DD2B7820269ED34E0045C8C3 /* addIncomeViewController.swift in Sources */,
 				423B8529269E92BB00D2A38C /* ViewController.swift in Sources */,
+				DD2B7822269ED3620045C8C3 /* addExpenseViewController.swift in Sources */,
 				423B8525269E92BB00D2A38C /* AppDelegate.swift in Sources */,
 				423B8527269E92BB00D2A38C /* SceneDelegate.swift in Sources */,
 			);
