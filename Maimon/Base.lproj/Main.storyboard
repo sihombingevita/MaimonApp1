@@ -292,12 +292,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-Zv-gN8">
+                                <rect key="frame" x="41" y="418" width="299" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ihw-Oc-aCH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="categoryExpense" destination="MZk-Fw-gMA" id="avD-pd-SeD"/>
+                        <outlet property="dateExpense" destination="FEG-Zv-gN8" id="1r8-I0-kdG"/>
                         <outlet property="itemExpense" destination="zl2-kE-niO" id="iyY-06-oKc"/>
                         <outlet property="priceExpense" destination="Dxa-lB-dqu" id="ilc-ZE-nOX"/>
                     </connections>
