@@ -13,7 +13,7 @@ class addIncomeViewController: UIViewController {
     @IBOutlet weak var dateIncome: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //priceIncome.keyboardType = .numberPad
+        priceIncome.keyboardType = .numberPad
         priceIncome.layer.cornerRadius = 15
         priceIncome.layer.borderWidth = 0.5
         
@@ -21,17 +21,25 @@ class addIncomeViewController: UIViewController {
         dateIncome.layer.borderWidth = 0.5
         
         self.dateIncome.setInputViewDatePicker(target: self, selector: #selector(tapDone)) //1
-            }
+
+    }
+    @objc func tapDone() {
+        if let datePicker = self.dateIncome.inputView as? UIDatePicker { // 2-1
+            let dateformatter = DateFormatter() // 2-2
+            dateformatter.dateStyle = .medium // 2-3
+            self.dateIncome.text = dateformatter.string(from: datePicker.date) //2-4
             
-            //2
-            @objc func tapDone() {
-                if let datePicker = self.dateIncome.inputView as? UIDatePicker { // 2-1
-                    let dateformatter = DateFormatter() // 2-2
-                    dateformatter.dateStyle = .medium // 2-3
-                    self.dateIncome.text = dateformatter.string(from: datePicker.date) //2-4
-                }
-                self.dateIncome.resignFirstResponder() // 2-5
+        }
+            self.dateIncome.resignFirstResponder() // 2-5
+        
+    }
+    @objc private func priceIncomeFilter(_ priceIncome: UITextField){
+        if let text = priceIncome.text, let intText = Int(text){
+            priceIncome.text = "\(intText)"
+        }else{
+            priceIncome.text = ""
             }
+        }
 }
 extension UITextField {
     
