@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IgT-mr-nCV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -144,8 +144,8 @@
                                 <connections>
                                     <action selector="addButton" destination="38y-j2-BGq" eventType="touchUpInside" id="7yf-DF-j7x"/>
                                     <action selector="addButton:" destination="38y-j2-BGq" eventType="touchUpInside" id="NqM-r2-uwg"/>
-                                    <action selector="addTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jaj-01-m9l"/>
                                     <action selector="addTapped:" destination="38y-j2-BGq" eventType="touchUpInside" id="Zmh-Zt-x5v"/>
+                                    <segue destination="atD-OF-GNP" kind="show" id="Vnx-7I-bwq"/>
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-wG-Blj">
@@ -156,9 +156,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <connections>
-                        <outlet property="addButton" destination="Iq6-de-ny2" id="Nb0-Zv-9g3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="38y-j2-BGq" userLabel="Exit" sceneMemberID="exit"/>
@@ -191,71 +188,49 @@
             </objects>
             <point key="canvasLocation" x="16.923076923076923" y="809.71563981042652"/>
         </scene>
-        <!--Add Income View Controller-->
+        <!--Add-->
         <scene sceneID="3Q7-S2-Whk">
             <objects>
-                <viewController id="IgT-mr-nCV" customClass="addIncomeViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IgT-mr-nCV" customClass="addInEx" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQ1-uk-L7s">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WzS-Z9-ItD">
-                                <rect key="frame" x="7" y="44" width="390" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="HMu-Q2-rvy"/>
-                                </items>
-                            </navigationBar>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eCb-1c-bni">
-                                <rect key="frame" x="-138" y="44" width="390" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oHh-Ox-bDg">
-                                <rect key="frame" x="41" y="120" width="308" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYG-ph-3Es">
+                                <rect key="frame" x="0.0" y="111" width="390" height="679"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oHh-Ox-bDg">
+                                <rect key="frame" x="41" y="72" width="308" height="32"/>
                                 <segments>
                                     <segment title="Income"/>
                                     <segment title="Expense"/>
                                 </segments>
+                                <connections>
+                                    <action selector="switchAdd:" destination="IgT-mr-nCV" eventType="valueChanged" id="NNI-Po-eCi"/>
+                                </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCD-BN-TpU">
-                                <rect key="frame" x="50" y="177" width="39" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date and time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjb-Ja-nqx">
-                                <rect key="frame" x="50" y="259" width="107" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the price" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dsf-39-spr">
-                                <rect key="frame" x="50" y="206" width="299" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsO-FG-iAc">
-                                <rect key="frame" x="50" y="288" width="299" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GGH-bO-BUW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="lYG-ph-3Es" secondAttribute="bottom" constant="-34" id="38z-Gd-Tvr"/>
+                            <constraint firstItem="lYG-ph-3Es" firstAttribute="top" secondItem="oHh-Ox-bDg" secondAttribute="bottom" constant="8" id="KCj-ZD-zVU"/>
+                            <constraint firstItem="oHh-Ox-bDg" firstAttribute="leading" secondItem="GGH-bO-BUW" secondAttribute="leading" constant="41" id="NSw-le-qfL"/>
+                            <constraint firstItem="oHh-Ox-bDg" firstAttribute="top" secondItem="GGH-bO-BUW" secondAttribute="top" constant="16" id="S8Z-Pu-JD8"/>
+                            <constraint firstItem="oHh-Ox-bDg" firstAttribute="centerX" secondItem="MQ1-uk-L7s" secondAttribute="centerX" id="dVo-DI-E5I"/>
+                            <constraint firstItem="lYG-ph-3Es" firstAttribute="leading" secondItem="GGH-bO-BUW" secondAttribute="leading" id="obz-6G-Tjg"/>
+                            <constraint firstItem="oHh-Ox-bDg" firstAttribute="centerX" secondItem="lYG-ph-3Es" secondAttribute="centerX" id="sAb-yG-Nvn"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Add" id="LFK-rE-7Nn"/>
                     <connections>
-                        <outlet property="dateIncome" destination="dsO-FG-iAc" id="Lub-77-5Xc"/>
-                        <outlet property="priceIncome" destination="Dsf-39-spr" id="7yi-07-KOc"/>
+                        <outlet property="addView" destination="lYG-ph-3Es" id="2JA-N7-xPS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djZ-ui-LRQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="798" y="93"/>
+            <point key="canvasLocation" x="1726.1538461538462" y="92.417061611374407"/>
         </scene>
         <!--Add Expense View Controller-->
         <scene sceneID="Qlh-mZ-UmX">
@@ -351,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twL-Zw-kQt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1577" y="93"/>
+            <point key="canvasLocation" x="2506.1538461538462" y="92.417061611374407"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yRA-xd-6Q5">
@@ -367,6 +342,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCI-zi-Jcw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="797" y="810"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="adF-y0-J6i">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="atD-OF-GNP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Mt7-BD-fSn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yjU-Z4-0fE">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IgT-mr-nCV" kind="relationship" relationship="rootViewController" id="sGg-1S-gao"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xpj-rI-Ca2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="796.92307692307691" y="92.417061611374407"/>
         </scene>
     </scenes>
     <resources>

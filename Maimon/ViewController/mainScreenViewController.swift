@@ -10,12 +10,7 @@ import UIKit
 
 
 class mainScreenViewController: UIViewController {
-    
-    
-
-  
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
