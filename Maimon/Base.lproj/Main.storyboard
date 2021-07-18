@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XWC-xn-Uyf">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="1726.1538461538462" y="92.417061611374407"/>
         </scene>
-        <!--Add Expense View Controller-->
+        <!--Additional Screen-->
         <scene sceneID="Qlh-mZ-UmX">
             <objects>
-                <viewController id="XWC-xn-Uyf" customClass="addExpenseViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XWC-xn-Uyf" customClass="additionalScreen" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mx2-Bw-X4H">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,10 +318,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="categoryExpense" destination="MZk-Fw-gMA" id="avD-pd-SeD"/>
-                        <outlet property="dateExpense" destination="FEG-Zv-gN8" id="1r8-I0-kdG"/>
-                        <outlet property="itemExpense" destination="zl2-kE-niO" id="iyY-06-oKc"/>
-                        <outlet property="priceExpense" destination="Dxa-lB-dqu" id="ilc-ZE-nOX"/>
+                        <outlet property="categoryExpense" destination="MZk-Fw-gMA" id="ByL-HS-kF6"/>
+                        <outlet property="dateExpense" destination="FEG-Zv-gN8" id="5un-aC-nUI"/>
+                        <outlet property="itemExpense" destination="zl2-kE-niO" id="l5D-ve-M7f"/>
+                        <outlet property="priceExpense" destination="Dxa-lB-dqu" id="9tg-Jg-QQl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twL-Zw-kQt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
