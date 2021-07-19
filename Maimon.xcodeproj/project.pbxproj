@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4222B95726A57E070041608A /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222B95626A57E070041608A /* PersistanceManager.swift */; };
 		423B8525269E92BB00D2A38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423B8524269E92BB00D2A38C /* AppDelegate.swift */; };
 		423B8527269E92BB00D2A38C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423B8526269E92BB00D2A38C /* SceneDelegate.swift */; };
 		423B8529269E92BB00D2A38C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423B8528269E92BB00D2A38C /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4222B95626A57E070041608A /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		423B8521269E92BB00D2A38C /* Maimon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maimon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		423B8524269E92BB00D2A38C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		423B8526269E92BB00D2A38C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4222B95526A57DDA0041608A /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				4222B95626A57E070041608A /* PersistanceManager.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
 		423B8518269E92BB00D2A38C = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		423B8523269E92BB00D2A38C /* Maimon */ = {
 			isa = PBXGroup;
 			children = (
+				4222B95526A57DDA0041608A /* Persistance */,
 				423B8524269E92BB00D2A38C /* AppDelegate.swift */,
 				423B8526269E92BB00D2A38C /* SceneDelegate.swift */,
 				423B8528269E92BB00D2A38C /* ViewController.swift */,
@@ -164,6 +175,7 @@
 				DD42B03226A029FE00483108 /* mainScreenViewController.swift in Sources */,
 				423B8525269E92BB00D2A38C /* AppDelegate.swift in Sources */,
 				423B8527269E92BB00D2A38C /* SceneDelegate.swift in Sources */,
+				4222B95726A57E070041608A /* PersistanceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
