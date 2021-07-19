@@ -10,11 +10,8 @@ import CoreData
 
 class PersistanceManager {
     static let shared = PersistanceManager()
-    
-    // MARK: - Core Data stack
-
     lazy var persistentContainer: NSPersistentContainer = {
-       
+        
         let container = NSPersistentContainer(name: "Maimon")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -26,21 +23,18 @@ class PersistanceManager {
 
     // MARK: - Core Data Saving support
     
-    // 1. Create save income function
-    
-    func insertIncome (descriptionInc: String, total: Double, date: Date, repeatInc: String) {
-        
+    // 1. create save income function
+    func insertIncome (descriptionInc: String, total: Double, date: Date, repeatInc: String){
         let income = Income(context: persistentContainer.viewContext)
         income.id = UUID()
         income.descriptionInc = descriptionInc
         income.total = total
         income.date = date
-        income.repeateInc = repeatInc
+        income.repeatInc = repeatInc
         saveContext()
     }
     
-    // 2. Create save expanse function
-    
+    // 2. create save expense function
     func insertExpense (total: Double, descriptionExp: String, date: Date, repeatExp: String, category: Category) {
         let expense = Expense(context: persistentContainer.viewContext)
         expense.id = UUID()
@@ -48,14 +42,13 @@ class PersistanceManager {
         expense.descriptionExp = descriptionExp
         expense.date = date
         expense.category = category
-        expense.repeateExp = repeatExp
-        saveContext()
+        expense.repeatExp = repeatExp
         
+        saveContext()
     }
     
-    // 3. Create save category function
-    
-    func insertCategory (name: String, percentage: Double) {
+    // 3. create save category
+    func insertCategory(name: String, percentage: Double){
         let category = Category(context: persistentContainer.viewContext)
         category.id = UUID()
         category.name = name
@@ -63,7 +56,8 @@ class PersistanceManager {
         saveContext()
     }
     
-    // 4. Create function to fetch income data from coredata
+    //3. Create function to fetch income data from coredata
+    
     func fetchIncome() -> [Income] {
         let request : NSFetchRequest<Income> = Income.fetchRequest()
         
@@ -74,38 +68,42 @@ class PersistanceManager {
         do {
             income = try persistentContainer.viewContext.fetch(request)
         } catch {
-            print ("Error Fetching Data")
+            print ("Error Fetching data")
         }
         
         return income
     }
     
-    // 5. Create function to fetch Expense
-    // Get all expense
+    //4. Create function to fetch expense
+    // Get All Expense
     func fetchExpense () -> [Expense] {
         let request : NSFetchRequest<Expense> = Expense.fetchRequest()
         
         request.sortDescriptors = [NSSortDescriptor (key: "date", ascending: true)]
+        
         var expense : [Expense] = []
+        
         do {
             expense = try persistentContainer.viewContext.fetch(request)
+            
         } catch {
             print ("Error Fetching Data")
         }
+        
         return expense
     }
-    
-    // Get Expense by Category
+    //Get Expense by Category
     func fetchExpense (category: Category) -> [Expense] {
         let request : NSFetchRequest<Expense> = Expense.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category = %@", category)
+        request.predicate = NSPredicate(format: "(category = %@)", category)
         request.sortDescriptors = [NSSortDescriptor (key: "date", ascending: true)]
         
         var expense : [Expense] = []
         
         do {
             expense = try persistentContainer.viewContext.fetch(request)
+            
         } catch {
             print ("Error Fetching Data")
         }
@@ -113,15 +111,16 @@ class PersistanceManager {
         return expense
     }
     
-    // 6. Fetch Category
     func fetchCategory () -> [Category] {
         let request : NSFetchRequest<Category> = Category.fetchRequest()
+        
         request.sortDescriptors = [NSSortDescriptor (key: "name", ascending: true)]
         
         var category : [Category] = []
         
         do {
             category = try persistentContainer.viewContext.fetch(request)
+            
         } catch {
             print ("Error Fetching Data")
         }
@@ -129,12 +128,11 @@ class PersistanceManager {
         return category
     }
     
-    // 7. Fetch Category by name
-    
+    //fetch category by name
     func fetchCategory (name: String) -> [Category] {
         let request : NSFetchRequest<Category> = Category.fetchRequest()
         request.fetchLimit = 1
-        request.predicate = NSPredicate(format: "name = %@", name)
+        request.predicate = NSPredicate(format: "(name = %@)", name)
         
         request.sortDescriptors = [NSSortDescriptor (key: "name", ascending: true)]
         
@@ -142,6 +140,7 @@ class PersistanceManager {
         
         do {
             category = try persistentContainer.viewContext.fetch(request)
+            
         } catch {
             print ("Error Fetching Data")
         }
@@ -155,6 +154,8 @@ class PersistanceManager {
             do {
                 try context.save()
             } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
