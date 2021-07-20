@@ -20,13 +20,21 @@ class MainScreen: UIViewController, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     
     private var categories : [Category] = []
+    private var categoriesDefault : [Category] = []
     private let tableCellName : String = "CategoryTableViewCell"
+    
+    struct categoryStruct {
+        var category = Category()
+        var percent = 0.0
+    }
+    private var categoryData : [categoryStruct] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        PersistanceManager.shared.insertCategory(name: "Needs", percentage: 50)
 //        PersistanceManager.shared.insertCategory(name: "Saving", percentage: 30)
-//        PersistanceManager.shared.insertCategory(name: "Interest", percentage: 20)
+//        PersistanceManager.shared.insertCategory(name: "Interest", percentage: 10)
+//        PersistanceManager.shared.insertCategory(name: "Others", percentage: 10)
         setTableViewCell()
         configureTableView()
         load()
@@ -73,7 +81,36 @@ class MainScreen: UIViewController, UITableViewDelegate {
         expenseLbl.text = "Rp. " + formatter.string(from: NSNumber(value: expenseValue))!
         savingLbl.text = "Rp. " + formatter.string(from: NSNumber(value: savingValue))!
         setExpenseProgView(income: incomeValue, expense: expenseValue)
-        categories = PersistanceManager.shared.fetchCategory()
+        categoriesDefault = PersistanceManager.shared.fetchCategory()
+        
+        
+        var percent = 0.0
+        for cat in categoriesDefault{
+            var expenseValue2 = 0.0
+            var expenses = PersistanceManager.shared.fetchExpense(category: cat)
+            for exp in expenses{
+                expenseValue2 += exp.total
+            }
+            percent = (expenseValue2/incomeValue)*100
+            percent = percent / cat.percentage
+            if percent.isNaN == true{
+                percent = 0.0
+            }
+            var catStruct = categoryStruct()
+            catStruct.category = cat
+            catStruct.percent = percent
+            categoryData.append(catStruct)
+        }
+        categoryData.sort { (lhs: categoryStruct, rhs: categoryStruct) -> Bool in
+            // you can have additional code here
+            return lhs.percent > rhs.percent
+        }
+        
+        
+        for cat in categoryData{
+            categories.append(cat.category)
+        }
+        
         tableView.reloadData()
     }
     
@@ -121,9 +158,6 @@ extension MainScreen: UITableViewDataSource, UITabBarDelegate {
                 expenseValue += exp.total
             }
             percent = (expenseValue/incomeValue)*100
-            print(percent)
-            print(expenseValue)
-            print(incomeValue)
             cell.setDataIntoCell(name: category.name ?? "", percentage: percent, percentageCategory: category.percentage)
             
             return cell
