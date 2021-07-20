@@ -7,30 +7,39 @@
 
 import UIKit
 
-class MainScreen: UIViewController {
+class MainScreen: UIViewController, UITableViewDelegate {
 
     @IBOutlet var savingLbl: UILabel!
     @IBOutlet var incomeLbl: UILabel!
     @IBOutlet var expenseLbl: UILabel!
     @IBOutlet var expenseProgView: UIProgressView!
-    @IBOutlet var tableViewCategory: UITableView!
+    
     
     @IBOutlet var labelExpense: UILabel!
     @IBOutlet var addButton: UIButton!
+    @IBOutlet var tableView: UITableView!
     
-    private var categorie : [Category] = []
+    private var categories : [Category] = []
+    private let tableCellName : String = "CategoryTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //PersistanceManager.shared.insertCategory(name: "Needs", percentage: 50)
-        //PersistanceManager.shared.insertCategory(name: "Saving", percentage: 30)
-        //PersistanceManager.shared.insertCategory(name: "Interest", percentage: 20)
+//        PersistanceManager.shared.insertCategory(name: "Needs", percentage: 50)
+//        PersistanceManager.shared.insertCategory(name: "Saving", percentage: 30)
+//        PersistanceManager.shared.insertCategory(name: "Interest", percentage: 20)
+        setTableViewCell()
+        configureTableView()
         load()
         
     }
     
+    private func setTableViewCell(){
+        let nib = UINib(nibName: tableCellName, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: tableCellName)
+    }
+    
     @IBAction func addIncomeExpense(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(identifier: "addIncomeExpense") as! addIncomeViewController
+        let vc = self.storyboard?.instantiateViewController(identifier: "addIncome") as! addIncomeViewController
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
@@ -64,6 +73,8 @@ class MainScreen: UIViewController {
         expenseLbl.text = "Rp. " + formatter.string(from: NSNumber(value: expenseValue))!
         savingLbl.text = "Rp. " + formatter.string(from: NSNumber(value: savingValue))!
         setExpenseProgView(income: incomeValue, expense: expenseValue)
+        categories = PersistanceManager.shared.fetchCategory()
+        tableView.reloadData()
     }
     
     func setExpenseProgView(income: Double, expense: Double){
@@ -71,7 +82,7 @@ class MainScreen: UIViewController {
         expenseProgView.transform = expenseProgView.transform.scaledBy(x: 1, y: 10)
         percent = expense/income
         if percent.isNaN == true{
-            percent = 0.8
+            percent = 0.0
         }
         labelExpense.text = String(format :"%.1f",(percent*100)) + " %"
         labelExpense.textColor = .black
@@ -80,10 +91,60 @@ class MainScreen: UIViewController {
         if percent < 0.4 {
             color = .systemGreen
         }else if percent >= 0.4 && percent < 0.7{
-            color = .orange
+            color = .yellow
         }else{
             color = .systemRed
         }
         expenseProgView.progressTintColor = color
+    }
+}
+
+extension MainScreen: UITableViewDataSource, UITabBarDelegate {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: tableCellName, for: indexPath) as?  CategoryTableViewCell {
+            let category = self.categories[indexPath.row]
+            var expenses = PersistanceManager.shared.fetchExpense(category: category)
+            var incomes = PersistanceManager.shared.fetchIncome()
+            var incomeValue = 0.0
+            var expenseValue = 0.0
+            var percent = 0.0
+            for inc in incomes{
+                incomeValue += inc.total
+            }
+            for exp in expenses{
+                expenseValue += exp.total
+            }
+            percent = (expenseValue/incomeValue)*100
+            print(percent)
+            print(expenseValue)
+            print(incomeValue)
+            cell.setDataIntoCell(name: category.name ?? "", percentage: percent, percentageCategory: category.percentage)
+            
+            return cell
+        }
+        return UITableViewCell()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(80.0)
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let vc = storyboard?.instantiateViewController(identifier: "AddExpenseViewController") as? addExpenseViewController {
+//            vc.categoryExpense = self.categories[indexPath.row]
+//            self.navigationController?.pushViewController(vc, animated: false)
+//        }
+//    }
+    
+    func configureTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
