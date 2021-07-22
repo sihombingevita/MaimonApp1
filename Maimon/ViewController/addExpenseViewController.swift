@@ -32,6 +32,7 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = false
         descExpense.layer.cornerRadius = 15
         descExpense.layer.borderWidth = 0.5
         amountExpense.layer.cornerRadius = 15

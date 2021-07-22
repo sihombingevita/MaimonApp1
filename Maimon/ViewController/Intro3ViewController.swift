@@ -19,9 +19,10 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate {
 
         budgetingTextField.delegate = self
         
-
-
-
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeFunc(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
         toolbar.sizeToFit()
         let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonPressed))
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonPressed))
@@ -29,6 +30,25 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
         budgetingTextField.inputAccessoryView = toolbar
         
+    }
+    
+    @objc func swipeFunc(gesture:UISwipeGestureRecognizer) {
+        if gesture.direction == .right {
+            print("swiped right")
+//            performSegue(withIdentifier: "Second Instructions", sender: self)
+            
+            let vc = storyboard?.instantiateViewController(identifier: "introSecond") as! IntroViewController
+            vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+            
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromLeft
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            present(vc, animated: false, completion: nil)
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -50,7 +70,8 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-
+   
+    
     /*
     // MARK: - Navigation
 

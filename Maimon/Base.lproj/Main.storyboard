@@ -11,7 +11,7 @@
         <!--Intro1 View Controller-->
         <scene sceneID="u9J-rv-9j6">
             <objects>
-                <viewController id="dQB-y4-FHm" customClass="Intro1ViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="introFirst" id="dQB-y4-FHm" customClass="Intro1ViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mdO-c3-ceS">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,6 +50,9 @@
                         <viewLayoutGuide key="safeArea" id="8S2-LF-vqR"/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.96470588235294119" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="introFirstSkipNav" destination="4CG-OO-VtY" id="Orr-vE-aKT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4Y-nU-FgZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -58,7 +61,7 @@
         <!--Intro View Controller-->
         <scene sceneID="DJe-9X-bZd">
             <objects>
-                <viewController id="uio-bV-uC3" customClass="IntroViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="introSecond" id="uio-bV-uC3" customClass="IntroViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="teJ-oY-p8y">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +133,7 @@
         <!--Intro3 View Controller-->
         <scene sceneID="Joo-4B-q6c">
             <objects>
-                <viewController id="8Mw-Hj-Vvo" customClass="Intro3ViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="introThird" id="8Mw-Hj-Vvo" customClass="Intro3ViewController" customModule="Maimon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ugm-1S-9nn">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -490,6 +493,7 @@
                         <viewLayoutGuide key="safeArea" id="GGH-bO-BUW"/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.96470588235294119" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XRw-F6-3tO"/>
                     <connections>
                         <outlet property="amountIncome" destination="MhW-y3-5jC" id="Zn0-1v-Mwc"/>
                         <outlet property="changePageBtn" destination="oHh-Ox-bDg" id="35K-se-vJx"/>
@@ -524,6 +528,7 @@
                                 </segments>
                                 <connections>
                                     <action selector="changeButton:" destination="XWC-xn-Uyf" eventType="valueChanged" id="ZT0-RJ-z1r"/>
+                                    <segue destination="IgT-mr-nCV" kind="show" id="pZ3-bw-rxF"/>
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euE-LK-dFM">
