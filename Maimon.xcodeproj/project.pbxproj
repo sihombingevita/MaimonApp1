@@ -17,6 +17,9 @@
 		423B8534269E92C300D2A38C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423B8532269E92C300D2A38C /* LaunchScreen.storyboard */; };
 		427C85B326A6A6820030B1CB /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427C85B126A6A6820030B1CB /* CategoryTableViewCell.swift */; };
 		427C85B426A6A6820030B1CB /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427C85B226A6A6820030B1CB /* CategoryTableViewCell.xib */; };
+		8E65A4FA26A8E40E005A1582 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65A4F926A8E40E005A1582 /* IntroViewController.swift */; };
+		8E65A4FC26A9046A005A1582 /* Intro1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65A4FB26A9046A005A1582 /* Intro1ViewController.swift */; };
+		8E65A4FE26A9047C005A1582 /* Intro3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E65A4FD26A9047C005A1582 /* Intro3ViewController.swift */; };
 		DD2B7820269ED34E0045C8C3 /* addIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */; };
 		DD2B7822269ED3620045C8C3 /* addExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +37,9 @@
 		423B8535269E92C300D2A38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		427C85B126A6A6820030B1CB /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		427C85B226A6A6820030B1CB /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		8E65A4F926A8E40E005A1582 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		8E65A4FB26A9046A005A1582 /* Intro1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro1ViewController.swift; sourceTree = "<group>"; };
+		8E65A4FD26A9047C005A1582 /* Intro3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro3ViewController.swift; sourceTree = "<group>"; };
 		DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addIncomeViewController.swift; sourceTree = "<group>"; };
 		DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addExpenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +127,9 @@
 				DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */,
 				DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */,
 				4222B95B26A5916C0041608A /* MainScreen.swift */,
+				8E65A4F926A8E40E005A1582 /* IntroViewController.swift */,
+				8E65A4FB26A9046A005A1582 /* Intro1ViewController.swift */,
+				8E65A4FD26A9047C005A1582 /* Intro3ViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -196,11 +205,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E65A4FA26A8E40E005A1582 /* IntroViewController.swift in Sources */,
+				8E65A4FC26A9046A005A1582 /* Intro1ViewController.swift in Sources */,
 				423B852F269E92BB00D2A38C /* Maimon.xcdatamodeld in Sources */,
 				4222B95C26A5916C0041608A /* MainScreen.swift in Sources */,
 				DD2B7820269ED34E0045C8C3 /* addIncomeViewController.swift in Sources */,
 				DD2B7822269ED3620045C8C3 /* addExpenseViewController.swift in Sources */,
 				423B8525269E92BB00D2A38C /* AppDelegate.swift in Sources */,
+				8E65A4FE26A9047C005A1582 /* Intro3ViewController.swift in Sources */,
 				423B8527269E92BB00D2A38C /* SceneDelegate.swift in Sources */,
 				4222B95726A57E070041608A /* PersistanceManager.swift in Sources */,
 				427C85B326A6A6820030B1CB /* CategoryTableViewCell.swift in Sources */,
