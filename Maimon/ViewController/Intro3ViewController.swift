@@ -42,6 +42,18 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 //        vc.modalPresentationStyle = .fullScreen
 //        self.present(vc, animated: true)
         
+//        let vc = storyboard?.instantiateViewController(identifier: "main") as! MainScreen
+//        vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+//
+//        let transition = CATransition()
+//        transition.duration = 0.5
+//        transition.type = CATransitionType.push
+//        transition.subtype = CATransitionSubtype.fromLeft
+//        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+//        view.window!.layer.add(transition, forKey: kCATransition)
+//        present(vc, animated: false, completion: nil)
+        
         let vc = storyboard?.instantiateViewController(identifier: "main") as! MainScreen
         vc.modalPresentationStyle = .fullScreen
 //            present(vc,animated: true)
@@ -49,7 +61,7 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         let transition = CATransition()
         transition.duration = 0.5
         transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromLeft
+        transition.subtype = CATransitionSubtype.fromRight
         transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
         view.window!.layer.add(transition, forKey: kCATransition)
         present(vc, animated: false, completion: nil)
