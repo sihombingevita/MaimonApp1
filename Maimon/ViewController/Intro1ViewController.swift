@@ -8,13 +8,12 @@
 import UIKit
 
 class Intro1ViewController: UIViewController {
-
-    @IBOutlet weak var introFirstSkipNav: UINavigationBar!
+    
+    @IBOutlet weak var skipButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeFunc(gesture:)))
         swipeLeft.direction = .left
@@ -22,9 +21,35 @@ class Intro1ViewController: UIViewController {
     }
     
   
+    @IBAction func goToBudget(_ sender: Any) {
+        print("skip")
+        
+//        let vc = self.storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true)
+        
+        let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+        vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(vc, animated: false, completion: nil)
+        
+//        performSegue(withIdentifier: "firstToThird", sender: self)
+    }
     
-    
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "firstToThird"{
+//            guard segue.destination is Intro3ViewController else {return}
+//
+//
+//        }
+//    }
     
     @objc func swipeFunc(gesture:UISwipeGestureRecognizer) {
         if gesture.direction == .left {
@@ -45,7 +70,28 @@ class Intro1ViewController: UIViewController {
             }
         }
 
+    
+    }
 
+//extension UIButton{
+//    @IBAction func goToBudget(_ sender: Any) {
+//           print("skip")
+//   //            performSegue(withIdentifier: "Second Instructions", sender: self)
+//   
+//           let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+//           vc.modalPresentationStyle = .fullScreen
+//   //            present(vc,animated: true)
+//   
+//           let transition = CATransition()
+//           transition.duration = 0.5
+//           transition.type = CATransitionType.push
+//           transition.subtype = CATransitionSubtype.fromRight
+//           transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+//           view.window!.layer.add(transition, forKey: kCATransition)
+//           present(vc, animated: false, completion: nil)
+//           }
+//       }
+    
     /*
     // MARK: - Navigation
 
@@ -56,4 +102,5 @@ class Intro1ViewController: UIViewController {
     }
     */
 
-}
+    
+//}

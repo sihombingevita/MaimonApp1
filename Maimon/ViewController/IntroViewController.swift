@@ -11,6 +11,7 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var incomeInfoTextField: UITextField!
     @IBOutlet weak var incomeScrollView: UIScrollView!
+    @IBOutlet weak var skipButton: UIButton!
     
     let toolbar = UIToolbar()
     
@@ -35,6 +36,23 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
         incomeInfoTextField.inputAccessoryView = toolbar
     }
+    
+    @IBAction func goToBudgeting(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+        vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(vc, animated: false, completion: nil)
+        
+    }
+    
     
     @objc func swipeFunc(gesture:UISwipeGestureRecognizer) {
         if gesture.direction == .right {

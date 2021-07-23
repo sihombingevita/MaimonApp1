@@ -7,7 +7,7 @@
 
 import UIKit
 
-class addIncomeViewController: UIViewController {
+class addIncomeViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet var descIncome: UITextField!
@@ -22,17 +22,18 @@ class addIncomeViewController: UIViewController {
     
     @IBOutlet var saveBtn: UIButton!
     private var income : [Income] = []
+    let toolbar = UIToolbar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        descIncome.layer.cornerRadius = 15
+        descIncome.layer.cornerRadius = 10
         descIncome.layer.borderWidth = 0.5
         amountIncome.keyboardType = .numberPad
         
-        dateIncome.layer.cornerRadius = 15
+        dateIncome.layer.cornerRadius = 10
         dateIncome.layer.borderWidth = 0.5
         
-        amountIncome.layer.cornerRadius = 15
+        amountIncome.layer.cornerRadius = 10
         amountIncome.layer.borderWidth = 0.5
         
         self.dateIncome.setInputViewDatePicker(target: self, selector: #selector(tapDone)) //1
@@ -43,7 +44,33 @@ class addIncomeViewController: UIViewController {
         weekly.isOn = false
         montly.isOn = false
         viewRepeat.isHidden = true
+        
+        amountIncome.delegate = self
+        descIncome.delegate = self
+        dateIncome.delegate = self
+        
+        toolbar.sizeToFit()
+        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonPressed))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonPressed))
+        let spaceFill = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
+        amountIncome.inputAccessoryView = toolbar
+        descIncome.inputAccessoryView = toolbar
 
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func clearButtonPressed(){
+        amountIncome.text = ""
+        descIncome.text = ""
+    }
+    
+    @objc func doneButtonPressed(){
+        self.view.endEditing(true)
     }
     
     
