@@ -130,6 +130,7 @@ class addIncomeViewController: UIViewController {
             let vc = self.storyboard?.instantiateViewController(identifier: "addExpense") as! addExpenseViewController
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: false)
+            
         }
     }
     

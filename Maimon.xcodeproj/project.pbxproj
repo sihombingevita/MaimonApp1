@@ -124,9 +124,9 @@
 			children = (
 				4222B95F26A5922E0041608A /* Expense */,
 				4222B95E26A592250041608A /* Income */,
-				DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */,
 				DD2B781F269ED34E0045C8C3 /* addIncomeViewController.swift */,
 				4222B95B26A5916C0041608A /* MainScreen.swift */,
+				DD2B7821269ED3620045C8C3 /* addExpenseViewController.swift */,
 				8E65A4F926A8E40E005A1582 /* IntroViewController.swift */,
 				8E65A4FB26A9046A005A1582 /* Intro1ViewController.swift */,
 				8E65A4FD26A9047C005A1582 /* Intro3ViewController.swift */,

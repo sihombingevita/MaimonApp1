@@ -160,7 +160,11 @@ extension MainScreen: UITableViewDataSource, UITabBarDelegate {
             percent = (expenseValue/incomeValue)*100
             cell.setDataIntoCell(name: category.name ?? "", percentage: percent, percentageCategory: category.percentage)
             
+            cell.backgroundColor = .clear
+                
+            
             return cell
+            
         }
         return UITableViewCell()
         
@@ -180,5 +184,6 @@ extension MainScreen: UITableViewDataSource, UITabBarDelegate {
     func configureTableView(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .clear
     }
 }
