@@ -41,20 +41,27 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     @IBAction func goToMain(_ sender: Any) {
-        saveIncome()
-        saveBudget()
-        PersistanceManager.shared.setSetting(initialized: true)
-        let vc = storyboard?.instantiateViewController(identifier: "main") as! MainScreen
-        vc.modalPresentationStyle = .fullScreen
-        //            present(vc,animated: true)
-        
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.type = CATransitionType.push
-        transition.subtype = CATransitionSubtype.fromRight
-        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        view.window!.layer.add(transition, forKey: kCATransition)
-        present(vc, animated: false, completion: nil)
+        if budgetingTextField.text == ""{
+            //alert
+            let alert = UIAlertController(title: "Warning", message: "Please choose your budget!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            saveIncome()
+            saveBudget()
+            PersistanceManager.shared.setSetting(initialized: true)
+            let vc = storyboard?.instantiateViewController(identifier: "main") as! MainScreen
+            vc.modalPresentationStyle = .fullScreen
+            //            present(vc,animated: true)
+            
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            present(vc, animated: false, completion: nil)
+        }
         
     }
     

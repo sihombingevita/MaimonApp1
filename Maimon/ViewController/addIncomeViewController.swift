@@ -75,40 +75,58 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func saveButton(_ sender: Any) {
-        guard let total = amountIncome.text else {
-            return
-        }
-        guard let description = descIncome.text else {
-            return
-        }
-        guard let dateInc = dateIncome.text else {
-            return
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        var dateComponent = DateComponents()
-        dateComponent.day = 1
-        var date = dateFormatter.date(from: dateInc)
-        date = Calendar.current.date(byAdding: dateComponent, to: date ?? Date())
+        let regex = #"^[0-9]*(\.\d{1,2})?$"#
+        var result = amountIncome.text!.range(
+            of: regex,
+            options: .regularExpression
+        )
         
-        //set nilai repeat
-        var repeatInc = "NONE"
-        if(repeatSW.isOn == true){
-            if(daily.isOn == true){
-                repeatInc = "DAILY"
-            }else if(weekly.isOn == true){
-                repeatInc = "WEEKLY"
-            }else{
-                repeatInc = "MONTHLY"
+        if amountIncome.text == "" || descIncome.text == "" || dateIncome.text == ""{
+            //alert
+            let alert = UIAlertController(title: "Warning", message: "Please fill all the blank fields!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if result == nil{
+            let alert = UIAlertController(title: "Warning", message: "Incorrect format in amount field!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            guard let total = amountIncome.text else {
+                return
             }
-        }
-        
-        PersistanceManager.shared.insertIncome(descriptionInc: description, total: Double(total) ?? 0.0, date: date ?? Date(), repeatInc: repeatInc)
-        
-        // fungsi untuk balik ke main screen
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
-        self.present(newViewController, animated: true, completion: nil)
+            guard let description = descIncome.text else {
+                return
+            }
+            guard let dateInc = dateIncome.text else {
+                return
+            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            var dateComponent = DateComponents()
+            dateComponent.day = 1
+            var date = dateFormatter.date(from: dateInc)
+            date = Calendar.current.date(byAdding: dateComponent, to: date ?? Date())
+            
+            //set nilai repeat
+            var repeatInc = "NONE"
+            if(repeatSW.isOn == true){
+                if(daily.isOn == true){
+                    repeatInc = "DAILY"
+                }else if(weekly.isOn == true){
+                    repeatInc = "WEEKLY"
+                }else{
+                    repeatInc = "MONTHLY"
+                }
+            }
+            
+            PersistanceManager.shared.insertIncome(descriptionInc: description, total: Double(total) ?? 0.0, date: date ?? Date(), repeatInc: repeatInc)
+            
+            // fungsi untuk balik ke main screen
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
+            newViewController.modalPresentationStyle = .fullScreen
+            self.present(newViewController, animated: true, completion: nil)}
     }
     
     @IBAction func repeatPressed(_ sender: Any) {

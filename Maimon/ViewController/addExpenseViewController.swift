@@ -89,44 +89,61 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     
     @IBAction func saveButton(_ sender: Any) {
-        guard let total = amountExpense.text else {
-            return
+        let regex = #"^[0-9]*(\.\d{1,2})?$"#
+        var result = amountExpense.text!.range(
+            of: regex,
+            options: .regularExpression
+        )
+        //alert
+        if descExpense.text == "" || amountExpense.text == "" ||  dateExpense.text == "" || categoryExpense.text == "" {
+            let alert = UIAlertController(title: "Warning", message: "Please fill all the blank fields!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else if result == nil{
+            let alert = UIAlertController(title: "Warning", message: "Incorrect format in amount field!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Back", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        guard let descriptionExp = descExpense.text else {
-            return
-        }
-        
-        guard let dateExp = dateExpense.text else {
-            return
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        var dateComponent = DateComponents()
-        dateComponent.day = 1
-        var date = dateFormatter.date(from: dateExp)
-        date = Calendar.current.date(byAdding: dateComponent, to: date ?? Date())
-        
-        //set repeatExp
-        var repeatExp = "NONE"
-        if(daily.isOn == true){
-            repeatExp = "DAILY"
-        }else if (weekly.isOn == true){
-            repeatExp = "WEEKLY"
-        }else{
-            repeatExp = "MONTHLY"
-        }
-        let categoryExp = PersistanceManager.shared.fetchCategory(name: categoryExpense.text ?? "")
-        var categoryExpense : Category!
-        categoryExpense = categoryExp[0]
-        
-        //insert data ke database
-        PersistanceManager.shared.insertExpense(total: Double(total) ?? 0.0, descriptionExp: description, date: date ?? Date(), repeatExp: repeatExp, category: categoryExpense)
-        
-        //        // fungsi untuk balik ke main screen
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
-        self.present(newViewController, animated: true, completion: nil)
+        else {
+            guard let total = amountExpense.text else {
+                return
+            }
+            
+            guard let descriptionExp = descExpense.text else {
+                return
+            }
+            
+            guard let dateExp = dateExpense.text else {
+                return
+            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            var dateComponent = DateComponents()
+            dateComponent.day = 1
+            var date = dateFormatter.date(from: dateExp)
+            date = Calendar.current.date(byAdding: dateComponent, to: date ?? Date())
+            
+            //set repeatExp
+            var repeatExp = "NONE"
+            if(daily.isOn == true){
+                repeatExp = "DAILY"
+            }else if (weekly.isOn == true){
+                repeatExp = "WEEKLY"
+            }else{
+                repeatExp = "MONTHLY"
+            }
+            let categoryExp = PersistanceManager.shared.fetchCategory(name: categoryExpense.text ?? "")
+            var categoryExpense : Category!
+            categoryExpense = categoryExp[0]
+            
+            //insert data ke database
+            PersistanceManager.shared.insertExpense(total: Double(total) ?? 0.0, descriptionExp: description, date: date ?? Date(), repeatExp: repeatExp, category: categoryExpense)
+            
+            //        // fungsi untuk balik ke main screen
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
+            newViewController.modalPresentationStyle = .fullScreen
+            self.present(newViewController, animated: true, completion: nil)}
     }
     
     @IBAction func backBtn(_ sender: Any) {
@@ -185,6 +202,9 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         categoryExpense.inputAccessoryView = toolBar
     }
     @objc func action() {
+        if categoryExpense.text == ""{
+            categoryExpense.text = categoryList[0]
+        }
         view.endEditing(true)
     }
     
