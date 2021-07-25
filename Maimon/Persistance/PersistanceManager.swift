@@ -147,6 +147,28 @@ class PersistanceManager {
         
         return category
     }
+    
+//    set initialized
+    func setSetting (initialized:Bool){
+        let setting = Setting(context: persistentContainer.viewContext)
+        setting.initialized = initialized
+        saveContext()
+    }
+    
+    //fetch initialized
+    func fetchInitialized() -> [Setting] {
+        let request : NSFetchRequest<Setting> = Setting.fetchRequest()
+        request.fetchLimit = 1
+        var setting : [Setting] = []
+        
+        do {
+          setting = try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print ("Error Fetching data")
+        }
+        
+        return setting
+    }
 
     func saveContext () {
         let context = persistentContainer.viewContext

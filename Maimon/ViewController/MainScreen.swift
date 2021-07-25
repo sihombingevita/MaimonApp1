@@ -32,10 +32,7 @@ class MainScreen: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
-//        PersistanceManager.shared.insertCategory(name: "Needs", percentage: 50)
-//        PersistanceManager.shared.insertCategory(name: "Saving", percentage: 30)
-//        PersistanceManager.shared.insertCategory(name: "Interest", percentage: 10)
-//        PersistanceManager.shared.insertCategory(name: "Others", percentage: 10)
+
         setTableViewCell()
         configureTableView()
         load()

@@ -21,9 +21,13 @@
         <attribute name="repeatInc" attributeType="String"/>
         <attribute name="total" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="Setting" representedClassName="Setting" syncable="YES" codeGenerationType="class">
+        <attribute name="initialized" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <elements>
         <element name="Category" positionX="-63" positionY="-18" width="128" height="89"/>
         <element name="Expense" positionX="-54" positionY="-9" width="128" height="119"/>
         <element name="Income" positionX="-36" positionY="9" width="128" height="104"/>
+        <element name="Setting" positionX="-54" positionY="36" width="128" height="44"/>
     </elements>
 </model>

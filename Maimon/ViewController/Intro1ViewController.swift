@@ -10,17 +10,34 @@ import UIKit
 class Intro1ViewController: UIViewController {
     
     @IBOutlet weak var skipButton: UIButton!
-    
+    var initialized: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        
+        var setting = PersistanceManager.shared.fetchInitialized()
+        if setting.count > 0{
+            initialized = setting[0].initialized
+            print(setting[0].initialized)
+        }
+        if initialized == true {
+            resetRoot()
+        }
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeFunc(gesture:)))
         swipeLeft.direction = .left
         self.view.addGestureRecognizer(swipeLeft)
+        
+        
     }
-    
-  
+    func resetRoot() {
+                guard let rootVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main") as? MainScreen else {
+                    return
+                }
+                let navigationController = UINavigationController(rootViewController: rootVC)
+
+                UIApplication.shared.windows.first?.rootViewController = navigationController
+                UIApplication.shared.windows.first?.makeKeyAndVisible()
+         }
     @IBAction func goToBudget(_ sender: Any) {
         print("skip")
         

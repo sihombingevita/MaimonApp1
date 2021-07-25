@@ -77,6 +77,7 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
             
             let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
             vc.modalPresentationStyle = .fullScreen
+            vc.income = incomeInfoTextField.text!
 //            present(vc,animated: true)
             
             let transition = CATransition()
@@ -107,17 +108,10 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneButtonPressed(){
         self.view.endEditing(true)
+        
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
