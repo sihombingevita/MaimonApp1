@@ -20,7 +20,7 @@ class PersistanceManager {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
     
     // 1. create save income function
@@ -148,7 +148,7 @@ class PersistanceManager {
         return category
     }
     
-//    set initialized
+    //    set initialized
     func setSetting (initialized:Bool){
         let setting = Setting(context: persistentContainer.viewContext)
         setting.initialized = initialized
@@ -162,14 +162,14 @@ class PersistanceManager {
         var setting : [Setting] = []
         
         do {
-          setting = try persistentContainer.viewContext.fetch(request)
+            setting = try persistentContainer.viewContext.fetch(request)
         } catch {
             print ("Error Fetching data")
         }
         
         return setting
     }
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

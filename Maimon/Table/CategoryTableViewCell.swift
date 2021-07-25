@@ -10,7 +10,7 @@ import UIKit
 class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var nameCategoryLabel: UILabel!
     @IBOutlet weak var percentageCategoryLabel: UILabel!
-
+    
     @IBOutlet var progressBar: UIProgressView!
     
     func setDataIntoCell(name: String, percentage: Double, percentageCategory: Double){
@@ -18,7 +18,6 @@ class CategoryTableViewCell: UITableViewCell {
         nameCategoryLabel.text = name
         progressBar.transform = progressBar.transform.scaledBy(x: 1, y: 10)
         percent = percentage/percentageCategory
-//        percentageCategoryLabel.text = String((round(percent*100)*10)/10.0) + " %"
         if percent.isNaN == true{
             percent = 0.0
         }
@@ -39,18 +38,3 @@ class CategoryTableViewCell: UITableViewCell {
     
     
 }
-//random color
-//extension CGFloat {
-//    static func random() -> CGFloat {
-//        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-//    }
-//}
-//
-//extension UIColor {
-//    static func random() -> UIColor {
-//        return UIColor(red:   .random(),
-//                       green: .random(),
-//                       blue:  .random(),
-//                       alpha: 1.0)
-//    }
-//}

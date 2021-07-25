@@ -8,7 +8,7 @@
 import UIKit
 
 class MainScreen: UIViewController, UITableViewDelegate {
-
+    
     @IBOutlet var savingLbl: UILabel!
     @IBOutlet var incomeLbl: UILabel!
     @IBOutlet var expenseLbl: UILabel!
@@ -32,7 +32,7 @@ class MainScreen: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
-
+        
         setTableViewCell()
         configureTableView()
         load()
@@ -67,7 +67,7 @@ class MainScreen: UIViewController, UITableViewDelegate {
         }
         
         savingValue = incomeValue - expenseValue
-            
+        
         let formatter = NumberFormatter()
         formatter.groupingSeparator = "."
         formatter.minimumFractionDigits = 2
@@ -159,7 +159,7 @@ extension MainScreen: UITableViewDataSource, UITabBarDelegate {
             cell.setDataIntoCell(name: category.name ?? "", percentage: percent, percentageCategory: category.percentage)
             
             cell.backgroundColor = .clear
-                
+            
             
             return cell
             
@@ -171,13 +171,6 @@ extension MainScreen: UITableViewDataSource, UITabBarDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80.0)
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = storyboard?.instantiateViewController(identifier: "AddExpenseViewController") as? addExpenseViewController {
-//            vc.categoryExpense = self.categories[indexPath.row]
-//            self.navigationController?.pushViewController(vc, animated: false)
-//        }
-//    }
     
     func configureTableView(){
         tableView.delegate = self

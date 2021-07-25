@@ -41,21 +41,6 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     @IBAction func goToMain(_ sender: Any) {
-        //        let vc = self.storyboard?.instantiateViewController(identifier: "main") as! MainScreen
-        //        vc.modalPresentationStyle = .fullScreen
-        //        self.present(vc, animated: true)
-        
-        //        let vc = storyboard?.instantiateViewController(identifier: "main") as! MainScreen
-        //        vc.modalPresentationStyle = .fullScreen
-        //            present(vc,animated: true)
-        //
-        //        let transition = CATransition()
-        //        transition.duration = 0.5
-        //        transition.type = CATransitionType.push
-        //        transition.subtype = CATransitionSubtype.fromLeft
-        //        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-        //        view.window!.layer.add(transition, forKey: kCATransition)
-        //        present(vc, animated: false, completion: nil)
         saveIncome()
         saveBudget()
         PersistanceManager.shared.setSetting(initialized: true)
@@ -94,16 +79,9 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        //        budgetingScrollView.setContentOffset(CGPoint(x: 0, y: 70), animated: true)
-        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
-    
-    //    func textFieldDidEndEditing(_ textField: UITextField) {
-    //        budgetingScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    //    }
-    //
     @objc func clearButtonPressed(){
         budgetingTextField.text = ""
     }
@@ -181,16 +159,4 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             PersistanceManager.shared.insertCategory(name: "Others", percentage: 10)
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

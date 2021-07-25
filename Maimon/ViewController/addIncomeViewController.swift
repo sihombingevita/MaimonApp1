@@ -8,7 +8,7 @@
 import UIKit
 
 class addIncomeViewController: UIViewController, UITextFieldDelegate {
-
+    
     
     @IBOutlet var descIncome: UITextField!
     @IBOutlet weak var dateIncome: UITextField!
@@ -56,7 +56,7 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
         amountIncome.inputAccessoryView = toolbar
         descIncome.inputAccessoryView = toolbar
-
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -95,24 +95,20 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         var repeatInc = "NONE"
         if(repeatSW.isOn == true){
             if(daily.isOn == true){
-               repeatInc = "DAILY"
+                repeatInc = "DAILY"
             }else if(weekly.isOn == true){
                 repeatInc = "WEEKLY"
             }else{
                 repeatInc = "MONTHLY"
             }
         }
-
+        
         PersistanceManager.shared.insertIncome(descriptionInc: description, total: Double(total) ?? 0.0, date: date ?? Date(), repeatInc: repeatInc)
-
+        
         // fungsi untuk balik ke main screen
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
-                self.present(newViewController, animated: true, completion: nil)
-
-
-        
-
+        self.present(newViewController, animated: true, completion: nil)
     }
     
     @IBAction func repeatPressed(_ sender: Any) {
@@ -168,7 +164,7 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
             self.dateIncome.text = dateformatter.string(from: datePicker.date) //2-4
             
         }
-            self.dateIncome.resignFirstResponder() // 2-5
+        self.dateIncome.resignFirstResponder() // 2-5
         
     }
     @objc private func priceIncomeFilter(_ priceIncome: UITextField){
@@ -176,8 +172,8 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
             priceIncome.text = "\(intText)"
         }else{
             priceIncome.text = ""
-            }
         }
+    }
 }
 extension UITextField {
     
@@ -188,8 +184,8 @@ extension UITextField {
         datePicker.datePickerMode = .date //2
         // iOS 14 and above
         if #available(iOS 14, *) {// Added condition for iOS 14
-          datePicker.preferredDatePickerStyle = .wheels
-          datePicker.sizeToFit()
+            datePicker.preferredDatePickerStyle = .wheels
+            datePicker.sizeToFit()
         }
         self.inputView = datePicker //3
         

@@ -8,7 +8,7 @@
 import UIKit
 
 class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate  {
-
+    
     
     @IBOutlet var backBtn: UIButton!
     @IBOutlet var changeBtn: UISegmentedControl!
@@ -41,8 +41,6 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         amountExpense.layer.borderWidth = 0.5
         categoryExpense.layer.cornerRadius = 10
         categoryExpense.layer.borderWidth = 0.5
-//        priceExpense.layer.cornerRadius = 15
-//        priceExpense.layer.borderWidth = 0.5
         dateExpense.layer.cornerRadius = 10
         dateExpense.layer.borderWidth = 0.5
         
@@ -80,10 +78,6 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         view.addGestureRecognizer(tap)
     }
     
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        incomeScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-//    }
-    
     @objc func clearButtonPressed(){
         amountExpense.text = ""
         descExpense.text = ""
@@ -92,7 +86,7 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     @objc func doneButtonPressed(){
         self.view.endEditing(true)
     }
-
+    
     
     @IBAction func saveButton(_ sender: Any) {
         guard let total = amountExpense.text else {
@@ -126,17 +120,13 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         var categoryExpense : Category!
         categoryExpense = categoryExp[0]
         
-        
-
         //insert data ke database
         PersistanceManager.shared.insertExpense(total: Double(total) ?? 0.0, descriptionExp: description, date: date ?? Date(), repeatExp: repeatExp, category: categoryExpense)
         
-//        // fungsi untuk balik ke main screen
+        //        // fungsi untuk balik ke main screen
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "main") as! MainScreen
-                self.present(newViewController, animated: true, completion: nil)
-
-       
+        self.present(newViewController, animated: true, completion: nil)
     }
     
     @IBAction func backBtn(_ sender: Any) {
@@ -152,7 +142,7 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
             self.dateExpense.text = dateformatter.string(from: datePicker.date) //2-4
             
         }
-            self.dateExpense.resignFirstResponder() // 2-5
+        self.dateExpense.resignFirstResponder() // 2-5
         
     }
     
@@ -160,7 +150,6 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         let categories = PersistanceManager.shared.fetchCategory()
         for cat in categories{
             categoryList.append(cat.name ?? "")
-            print(cat.name)
         }
     }
     
@@ -178,27 +167,26 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCategory = categoryList[row] // selected item
         categoryExpense.text = selectedCategory
-        
     }
     
     // function dismis dropdown picker
-     
-     func createPickerView() {
-            let pickerView = UIPickerView()
-            pickerView.delegate = self
-            categoryExpense.inputView = pickerView
-     }
-     func dismissPickerView() {
+    
+    func createPickerView() {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        categoryExpense.inputView = pickerView
+    }
+    func dismissPickerView() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
-         let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.action))
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.action))
         toolBar.setItems([button], animated: true)
         toolBar.isUserInteractionEnabled = true
         categoryExpense.inputAccessoryView = toolBar
-     }
-     @objc func action() {
-           view.endEditing(true)
-     }
+    }
+    @objc func action() {
+        view.endEditing(true)
+    }
     
     @IBAction func repeatPressed(_ sender: Any) {
         if(repeatSW.isOn == true){
@@ -241,42 +229,4 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
             self.present(vc, animated: false)
         }
     }
-    
-    
-//    @objc private func priceIncomeFilter(_ priceIncome: UITextField){
-//        if let text = priceIncome.text, let intText = Int(text){
-//            priceIncome.text = "\(intText)"
-//        }else{
-//            priceIncome.text = ""
-//            }
-//        }
 }
-
-//extension UITextField {
-//
-//    func setInputViewDatePicker(target: Any, selector: Selector) {
-//        // Create a UIDatePicker object and assign to inputView
-//        let screenWidth = UIScreen.main.bounds.width
-//        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 216))//1
-//        datePicker.datePickerMode = .date //2
-//        // iOS 14 and above
-//        if #available(iOS 14, *) {// Added condition for iOS 14
-//          datePicker.preferredDatePickerStyle = .wheels
-//          datePicker.sizeToFit()
-//        }
-//        self.inputView = datePicker //3
-//
-//        // Create a toolbar and assign it to inputAccessoryView
-//        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 44.0)) //4
-//        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //5
-//        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel)) // 6
-//        let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector) //7
-//        toolBar.setItems([cancel, flexible, barButton], animated: false) //8
-//        self.inputAccessoryView = toolBar //9
-//    }
-//
-//    @objc func tapCancel() {
-//        self.resignFirstResponder()
-//    }
-//
-//}
