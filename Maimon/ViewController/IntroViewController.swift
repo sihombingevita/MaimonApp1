@@ -11,6 +11,7 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var incomeInfoTextField: UITextField!
     @IBOutlet weak var incomeScrollView: UIScrollView!
+    @IBOutlet weak var skipButton: UIButton!
     
     let toolbar = UIToolbar()
     
@@ -18,9 +19,15 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         incomeInfoTextField.delegate = self
-        
         incomeInfoTextField.keyboardType = .asciiCapableNumberPad
 
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeFunc(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeFunc(gesture:)))
+        swipeRight.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
 
         toolbar.sizeToFit()
         let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonPressed))
@@ -29,6 +36,59 @@ class IntroViewController: UIViewController, UITextFieldDelegate {
         toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
         incomeInfoTextField.inputAccessoryView = toolbar
     }
+    
+    @IBAction func goToBudgeting(_ sender: Any) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+        vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        view.window!.layer.add(transition, forKey: kCATransition)
+        present(vc, animated: false, completion: nil)
+        
+    }
+    
+    
+    @objc func swipeFunc(gesture:UISwipeGestureRecognizer) {
+        if gesture.direction == .right {
+            print("swiped right")
+//            performSegue(withIdentifier: "Second Instructions", sender: self)
+            
+            let vc = storyboard?.instantiateViewController(identifier: "introFirst") as! Intro1ViewController
+            vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+            
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromLeft
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            present(vc, animated: false, completion: nil)
+        }
+        if gesture.direction == .left {
+            print("swiped left")
+//            performSegue(withIdentifier: "Second Instructions", sender: self)
+            
+            let vc = storyboard?.instantiateViewController(identifier: "introThird") as! Intro3ViewController
+            vc.modalPresentationStyle = .fullScreen
+//            present(vc,animated: true)
+            
+            let transition = CATransition()
+            transition.duration = 0.5
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+            view.window!.layer.add(transition, forKey: kCATransition)
+            present(vc, animated: false, completion: nil)
+        }
+    }
+
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         incomeScrollView.setContentOffset(CGPoint(x: 0, y: 120), animated: true)

@@ -30,17 +30,20 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
     //var categoryList: [String] = []
     var categoryList : [String] = []
     
+    let toolbar = UIToolbar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        descExpense.layer.cornerRadius = 15
+        navigationController?.isNavigationBarHidden = false
+        descExpense.layer.cornerRadius = 10
         descExpense.layer.borderWidth = 0.5
-        amountExpense.layer.cornerRadius = 15
+        amountExpense.layer.cornerRadius = 10
         amountExpense.layer.borderWidth = 0.5
-        categoryExpense.layer.cornerRadius = 15
+        categoryExpense.layer.cornerRadius = 10
         categoryExpense.layer.borderWidth = 0.5
 //        priceExpense.layer.cornerRadius = 15
 //        priceExpense.layer.borderWidth = 0.5
-        dateExpense.layer.cornerRadius = 15
+        dateExpense.layer.cornerRadius = 10
         dateExpense.layer.borderWidth = 0.5
         
         repeatSW.isOn = false
@@ -55,8 +58,41 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         self.dateExpense.setInputViewDatePicker(target: self, selector: #selector(tapDone)) //1
         
+        amountExpense.delegate = self
+        descExpense.delegate = self
+        dateExpense.delegate = self
+        categoryExpense.delegate = self
+        
+        amountExpense.keyboardType = .asciiCapableNumberPad
+        
+        toolbar.sizeToFit()
+        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearButtonPressed))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonPressed))
+        let spaceFill = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.setItems([clearButton,spaceFill,doneButton], animated: true)
+        amountExpense.inputAccessoryView = toolbar
+        descExpense.inputAccessoryView = toolbar
+        
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        incomeScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//    }
+    
+    @objc func clearButtonPressed(){
+        amountExpense.text = ""
+        descExpense.text = ""
+    }
+    
+    @objc func doneButtonPressed(){
+        self.view.endEditing(true)
+    }
+
     
     @IBAction func saveButton(_ sender: Any) {
         guard let total = amountExpense.text else {
