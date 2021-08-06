@@ -119,16 +119,17 @@ class MainScreen: UIViewController, UITableViewDelegate {
         if percent.isNaN == true{
             percent = 0.0
         }
+        percent = 1 - percent
         labelExpense.text = String(format :"%.1f",(percent*100)) + " %"
         labelExpense.textColor = .black
         expenseProgView.setProgress(Float(percent), animated: true)
         var color = UIColor()
         if percent < 0.4 {
-            color = .systemGreen
+            color = .systemRed
         }else if percent >= 0.4 && percent < 0.7{
             color = .yellow
         }else{
-            color = .systemRed
+            color = .systemGreen
         }
         expenseProgView.progressTintColor = color
     }

@@ -48,6 +48,7 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         daily.isOn = true
         weekly.isOn = false
         montly.isOn = false
+        daily.isEnabled = false
         viewRepeat.isHidden = true
         
         initiateCategory()
@@ -71,6 +72,20 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         amountExpense.inputAccessoryView = toolbar
         descExpense.inputAccessoryView = toolbar
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if(textField == amountExpense){
+            let allowedCharacters = "1234567890"
+            let allowedCharacterSet = CharacterSet(charactersIn: allowedCharacters)
+            let typedCharacterSet = CharacterSet(charactersIn: string)
+            
+            return allowedCharacterSet.isSuperset(of: typedCharacterSet)
+        }else if(textField == dateExpense || textField == categoryExpense){
+            return false
+        }else{
+            return true
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -220,7 +235,9 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         if(daily.isOn == true){
             weekly.setOn(false, animated: true)
             montly.setOn(false, animated: true)
-            
+            daily.isEnabled = false
+            weekly.isEnabled = true
+            montly.isEnabled = true
         }
     }
     
@@ -229,7 +246,9 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         if(weekly.isOn == true){
             daily.setOn(false, animated: true)
             montly.setOn(false, animated: true)
-            
+            weekly.isEnabled = false
+            daily.isEnabled = true
+            montly.isEnabled = true
         }
     }
     
@@ -237,7 +256,9 @@ class addExpenseViewController: UIViewController, UIPickerViewDelegate, UIPicker
         if(montly.isOn == true){
             daily.setOn(false, animated: true)
             weekly.setOn(false, animated: true)
-            
+            montly.isEnabled = false
+            daily.isEnabled = true
+            weekly.isEnabled = true
         }
     }
     

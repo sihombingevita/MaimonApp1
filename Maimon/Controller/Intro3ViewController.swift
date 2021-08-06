@@ -40,6 +40,11 @@ class Intro3ViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         
     }
     
+    //Prevent user to input any additional characters in budgetting
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
+    
     @IBAction func goToMain(_ sender: Any) {
         if budgetingTextField.text == ""{
             //alert

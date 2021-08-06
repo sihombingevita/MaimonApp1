@@ -26,6 +26,10 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        amountIncome.delegate = self
+        dateIncome.delegate = self
+        
         descIncome.layer.cornerRadius = 10
         descIncome.layer.borderWidth = 0.5
         amountIncome.keyboardType = .numberPad
@@ -43,6 +47,7 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         daily.isOn = true
         weekly.isOn = false
         montly.isOn = false
+        daily.isEnabled = false
         viewRepeat.isHidden = true
         
         amountIncome.delegate = self
@@ -57,6 +62,20 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         amountIncome.inputAccessoryView = toolbar
         descIncome.inputAccessoryView = toolbar
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if(textField == amountIncome){
+            let allowedCharacters = "1234567890"
+            let allowedCharacterSet = CharacterSet(charactersIn: allowedCharacters)
+            let typedCharacterSet = CharacterSet(charactersIn: string)
+            
+            return allowedCharacterSet.isSuperset(of: typedCharacterSet)
+        }else if(textField == dateIncome){
+            return false
+        }else{
+            return true
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -141,6 +160,9 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         if(daily.isOn == true){
             weekly.setOn(false, animated: true)
             montly.setOn(false, animated: true)
+            daily.isEnabled = false
+            weekly.isEnabled = true
+            montly.isEnabled = true
         }
     }
     
@@ -148,7 +170,9 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         if(weekly.isOn == true){
             daily.setOn(false, animated: true)
             montly.setOn(false, animated: true)
-            
+            weekly.isEnabled = false
+            daily.isEnabled = true
+            montly.isEnabled = true
         }
     }
     
@@ -156,7 +180,9 @@ class addIncomeViewController: UIViewController, UITextFieldDelegate {
         if(montly.isOn == true){
             daily.setOn(false, animated: true)
             weekly.setOn(false, animated: true)
-            
+            montly.isEnabled = false
+            daily.isEnabled = true
+            weekly.isEnabled = true
         }
     }
     
@@ -199,7 +225,7 @@ extension UITextField {
         // Create a UIDatePicker object and assign to inputView
         let screenWidth = UIScreen.main.bounds.width
         let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 216))//1
-        datePicker.datePickerMode = .date //2
+        datePicker.datePickerMode = .date//2
         // iOS 14 and above
         if #available(iOS 14, *) {// Added condition for iOS 14
             datePicker.preferredDatePickerStyle = .wheels
